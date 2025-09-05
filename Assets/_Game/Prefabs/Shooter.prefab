@@ -365,11 +365,10 @@ MonoBehaviour:
   bulletCount: 60
   colorID: 0
   Chosed: 1
-  darkMode: 1
+  hiddenMode: 1
   MeshRenderer: {fileID: 7899544314335810656}
-  darkShader: {fileID: -6465566751694194690, guid: 655ef5ed5650dbf49b1767edaf907b98,
-    type: 3}
-  lightShader: {fileID: 0}
+  hiddenMaterial: {fileID: 2100000, guid: 863906a3f121ac64197da1fc93e3b212, type: 2}
+  normalMaterial: {fileID: 2100000, guid: c6a63c30f10a15448ab9d2dcb249f718, type: 2}
   countText: {fileID: 600808067545299281}
 --- !u!1 &3163734964187771880
 GameObject:

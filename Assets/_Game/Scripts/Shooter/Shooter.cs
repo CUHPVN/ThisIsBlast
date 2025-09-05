@@ -11,41 +11,50 @@ public class Shooter : MonoBehaviour
     [SerializeField] private int bulletCount = 20;
     [SerializeField] private int colorID = 0;
     [SerializeField] private bool Chosed = true;
-    [SerializeField] public bool darkMode = true;
+    [SerializeField] public bool hiddenMode = true;
     [SerializeField] private SkinnedMeshRenderer MeshRenderer;
-    [SerializeField] private Shader darkShader;
-    [SerializeField] private Shader lightShader;
+    [SerializeField] private Material hiddenMaterial;
+    [SerializeField] private Material normalMaterial;
+
     [SerializeField] private TMP_Text countText;
     public void Awake()
     {
-        lightShader= Shader.Find("Universal Render Pipeline/Lit");
     }
     public void Start()
     {
         MeshRenderer.material.color = ColorPallet.GetColorByID(colorID);
         countText.text = bulletCount.ToString();
-        
     }
     public void Chose()
     {
-        if (Chosed|| !BlockGrid.Instance.AddShooter(this)) return;
-        BlockGrid.Instance.UpdateShooter(this);
+        if (Chosed|| !GridManager.Instance.AddShooter(this)) return;
+        GridManager.Instance.UpdateShooter(this);
         Chosed=true;
     }
     public void Shoot(int col)
     {
-        BlockGrid.Instance.Shoot(col);
+        GridManager.Instance.Shoot(col);
         bulletCount--;
         countText.text = bulletCount.ToString();
         if (bulletCount == 0)
         {
-            BlockGrid.Instance.RemoveShooter(this);
+            GridManager.Instance.RemoveShooter(this);
             transform.gameObject.SetActive(false);
         }
     }
-    public void SpawnVisual()
+    public int Clear()
     {
-
+        int count = bulletCount;
+        bulletCount=0;
+        countText.text = bulletCount.ToString();
+        GridManager.Instance.RemoveShooter(this);
+        transform.gameObject.SetActive(false);
+        return count;
+    }
+    public void AddCount(int value)
+    {
+        bulletCount += value;
+        countText.text = bulletCount.ToString();
     }
     public void MoveTo(Vector3 pos)
     {
@@ -55,10 +64,10 @@ public class Shooter : MonoBehaviour
     public bool GetChosed() => this.Chosed;
     public void SetDarkMode(bool value)
     {
-        darkMode = value;
-        if (darkMode)
+        hiddenMode = value;
+        if (hiddenMode)
         {
-            MeshRenderer.material.shader = darkShader;
+            MeshRenderer.material = hiddenMaterial;
 
             countText.gameObject.SetActive(false);
         }
@@ -66,13 +75,13 @@ public class Shooter : MonoBehaviour
     public void SetChosed()
     {
         Chosed = false;
-        if(darkMode)
+        if(hiddenMode)
         {
-            MeshRenderer.material.shader= lightShader;
+            MeshRenderer.material= normalMaterial;
             MeshRenderer.material.color = ColorPallet.GetColorByID(colorID);
 
             countText.gameObject.SetActive(true);
-            darkMode=false;
+            hiddenMode=false;
         }
     }
     public int GetColorID() => this.colorID;

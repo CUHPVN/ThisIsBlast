@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -160,7 +159,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -254,12 +253,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    quality: 3
-    frameInfluence: 0.1
-    jitterScale: 1
-    mipBias: 0
-    varianceClampScale: 0.9
-    contrastAdaptiveSharpening: 0
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!1 &346279104
 GameObject:
   m_ObjectHideFlags: 0
@@ -455,7 +454,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 508313814}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be8a297e146b96745bebb41126513ec5, type: 3}
+  m_Script: {fileID: 11500000, guid: d4e46bd6d39296042808172452fd91d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   blockLength: 13
@@ -468,7 +467,6 @@ MonoBehaviour:
   ShooterGrid: {fileID: 1011623783}
   ShooterSpawnPos: {fileID: 1211539523}
   shootersList: []
-  pivot: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!1001 &782167729
 PrefabInstance:
   m_ObjectHideFlags: 0
