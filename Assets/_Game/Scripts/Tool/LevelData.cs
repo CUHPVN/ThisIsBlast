@@ -34,7 +34,6 @@ public class ShooterData
 public static class LevelData
 {
     static string path = Path.Combine(Application.streamingAssetsPath, "colorList.json");
-
     public static List<IntList> ConvertToIntList(List<List<int>> source)
     {
         List<IntList> result = new List<IntList>();
@@ -75,10 +74,10 @@ public static class LevelData
 
     public static void ExportColorList(TileData tileData,ShooterData shooterData)
     {
+        path = Path.Combine(Application.streamingAssetsPath, "level"+GridParent.Instance.GetLevel()+".json");
         LevelWrapper wrapper = new LevelWrapper();
         wrapper.tileData = tileData;
         wrapper.shooterData= shooterData;
-        Debug.Log(wrapper.tileData.tileColor.Count);
         string json = JsonUtility.ToJson(wrapper, false);
         File.WriteAllText(path, json);
     }
@@ -86,6 +85,8 @@ public static class LevelData
     public static (TileData,ShooterData) ImportColorList()
     {
         //path = Application.dataPath + "/colorList.json";
+        path = Path.Combine(Application.streamingAssetsPath, "level" + Random.Range(0,2) + ".json");
+
         if (!File.Exists(path))
         {
             Debug.LogError("File not found: " + path);

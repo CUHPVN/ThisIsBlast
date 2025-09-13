@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlacementSystem : MonoBehaviour
 {
@@ -41,6 +42,8 @@ public class PlacementSystem : MonoBehaviour
     }
     void OnClick(int x,int z)
     {
+        
+        if (!GridParent.Instance.CheckTile(x, z)) return; 
         if (paintMode==PaintMode.Paint)
         {
             GridParent.Instance.Paint(x,z);
@@ -52,6 +55,7 @@ public class PlacementSystem : MonoBehaviour
     }
     void OnClickOnce(int x, int z)
     {
+        
         if (paintMode == PaintMode.Hidden)
         {
             GridParent.Instance.SetHidden(x, z);

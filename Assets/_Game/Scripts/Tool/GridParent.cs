@@ -12,6 +12,7 @@ public class GridParent : MonoBehaviour
     [SerializeField] private ColorShooter shooterPrefab;
     [SerializeField] private Transform tileParentPrefab;
     [SerializeField] private Transform shooterParentPrefab;
+    [SerializeField] private int level = 0;
     [SerializeField] private int colorCode = 0;
     [SerializeField] private int count = 1;
     [SerializeField] private int tileRow = 10;
@@ -26,10 +27,15 @@ public class GridParent : MonoBehaviour
     {
         Instance = this;
     }
-    void Start()
+    [ContextMenu("LoadLevel")]
+    void LoadLevel()
     {
         GenTile();
         GenShooter();
+    }
+    public int GetLevel()
+    {
+        return level;
     }
 
     void Update()
@@ -129,6 +135,8 @@ public class GridParent : MonoBehaviour
     }
     void Clear()
     {
+        if (tiles.Count <= 0) return;
+        if (shooters.Count <= 0) return;
         for (int i = 0; i < tileCol; i++)
         {
             for (int j = 0; j < tileRow; j++)
@@ -216,7 +224,13 @@ public class GridParent : MonoBehaviour
         if (y + shooterCol / 2 < 0 || y + shooterCol / 2 >= shooterCol || x + shooterRow / 2 < 0 || x + shooterRow / 2 >= shooterRow) return;
         shooters[y + shooterCol / 2][x + shooterRow / 2].SetHidden(!shooters[y + shooterCol / 2][x + shooterRow / 2].GetHidden());
     }
-
+    public bool CheckTile(int x,int y)
+    {
+        if(tiles.Count == 0) return false;
+        if (y + tileCol / 2 < 0 || y + tileCol / 2 >= tileCol || x + tileRow / 2 < 0 || x + tileRow / 2 >= tileRow) return false;
+        if ((tiles[y + tileCol / 2][x + tileRow / 2] == null)) return false;
+        return true;
+    }
     public void PaintTile(int x,int y)
     {
         if (y + tileCol / 2 <0|| y + tileCol / 2 >= tileCol || x + tileRow / 2 <0|| x + tileRow / 2 >= tileRow) return;
