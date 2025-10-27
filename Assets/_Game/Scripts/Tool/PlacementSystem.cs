@@ -56,6 +56,7 @@ public class PlacementSystem : MonoBehaviour
     void OnClickOnce(int x, int z)
     {
         
+
         if (paintMode == PaintMode.Hidden)
         {
             GridParent.Instance.SetHidden(x, z);
